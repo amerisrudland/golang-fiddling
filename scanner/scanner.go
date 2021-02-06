@@ -1,11 +1,9 @@
 package scanner
 
 import (
-	"fmt"
 	"strings"
 	"text/scanner"
 )
-
 
 const (
 	EOF = -(iota + 1)
@@ -16,13 +14,13 @@ const (
 	CloseBracket
 )
 
-func ScanIntoTokens(input string) string {
+func ScanIntoTokens(input string) []string {
 	var s scanner.Scanner
-	out := ""
+	var out []string
 	s.Init(strings.NewReader(input))
 	s.Filename = "example"
 	for tok := s.Scan(); tok != scanner.EOF; tok = s.Scan() {
-		out += fmt.Sprintf("%q: %s\n", scanner.TokenString(tok), s.TokenText())
+		out = append(out, scanner.TokenString(tok))
 	}
 	return out
 }

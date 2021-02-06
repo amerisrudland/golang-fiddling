@@ -8,19 +8,21 @@ func TestTokenReturn(t *testing.T) {
 		if a > 10 {
 			someParsable = text
 		}`)
-	want := `"Ident": if
-	"Ident": a
-	"\">\"": >
-	"Int": 10
-	"\"{\"": {
-	"Ident": someParsable
-	"\"=\"": =
-	"Ident": text
-	"\"}\"": }
-	`
+	want := []string{
+		"Ident",
+		"Ident",
+		"\">\"",
+		"Int",
+		"\"{\"",
+		"Ident",
+		"\"=\"",
+		"Ident",
+		"\"}\""}
 
-	if got != want {
-		t.Errorf("expected %v but got %v", want, got)
+	for i := 0; i < len(got); i++ {
+		if got[i] != want[i] {
+			t.Errorf("expected %v but got %v", want[i], got[i])
+		}
 	}
 
 }
